@@ -1,0 +1,169 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Digital Card Demo</title>
+
+<style>
+body{
+  margin:0;
+  font-family:Poppins,Arial;
+  background:linear-gradient(135deg,#0f0c29,#302b63,#24243e);
+  color:#fff;
+  text-align:center;
+}
+
+.hidden{display:none;}
+
+header{padding:30px 15px;}
+h1{font-size:28px;margin-bottom:10px;}
+p{opacity:.9}
+
+.container{
+  display:grid;
+  grid-template-columns:repeat(auto-fit,minmax(250px,1fr));
+  gap:20px;
+  padding:20px;
+}
+
+.card{
+  background:rgba(255,255,255,.08);
+  border-radius:20px;
+  padding:20px;
+  transition:.4s;
+}
+.card:hover{
+  transform:translateY(-8px) scale(1.03);
+  box-shadow:0 0 25px hotpink;
+}
+
+.btn{
+  margin-top:15px;
+  padding:10px 22px;
+  border-radius:25px;
+  background:hotpink;
+  color:#000;
+  font-weight:bold;
+  border:none;
+  cursor:pointer;
+}
+
+/* DEMO SECTION */
+.demo{
+  min-height:100vh;
+  padding:40px 20px;
+}
+
+.demo h2{font-size:30px;}
+.demo p{font-size:17px;margin:20px 0;}
+
+.next{
+  background:cyan;
+  color:#000;
+}
+</style>
+</head>
+
+<body>
+
+<!-- HOME PAGE -->
+<div id="home">
+<header>
+  <h1>💌 Digital Card Demo</h1>
+  <p>Love • Birthday • Wedding • Festival Cards</p>
+</header>
+
+<div class="container">
+
+  <div class="card">
+    <h2>❤️ Love Card</h2>
+    <p>Romantic animated cards for couples</p>
+    <button class="btn" onclick="startDemo('love')">View Demo</button>
+  </div>
+
+  <div class="card">
+    <h2>🎂 Birthday Card</h2>
+    <p>Fun and colorful birthday wishes</p>
+    <button class="btn" onclick="startDemo('birthday')">View Demo</button>
+  </div>
+
+  <div class="card">
+    <h2>💍 Wedding Card</h2>
+    <p>Elegant and emotional wedding cards</p>
+    <button class="btn" onclick="startDemo('wedding')">View Demo</button>
+  </div>
+
+  <div class="card">
+    <h2>🪔 Festival Card</h2>
+    <p>Diwali, Eid, Christmas and more</p>
+    <button class="btn" onclick="startDemo('festival')">View Demo</button>
+  </div>
+
+</div>
+</div>
+
+<!-- DEMO PAGES -->
+<div id="demo" class="demo hidden">
+  <h2 id="title"></h2>
+  <p id="text"></p>
+  <button class="btn next" onclick="nextPage()">Next ➡️</button>
+</div>
+
+<script>
+let step = 0;
+let type = "";
+
+const content = {
+  love: [
+    ["❤️ Someone Loves You", "A special romantic surprise is waiting for you"],
+    ["💞 Pure Emotions", "Because some feelings deserve more than words"],
+    ["✨ Just a Demo",
+     "Better, more beautiful and fully customized love cards are available. DM to get yours."]
+  ],
+  birthday: [
+    ["🎉 Welcome", "Someone planned a birthday surprise for you"],
+    ["🎂 Celebration Time", "Colorful wishes made extra special"],
+    ["✨ Just a Demo",
+     "Premium and personalized birthday cards available. DM to create yours."]
+  ],
+  wedding: [
+    ["💍 A New Journey Begins", "Two souls, one beautiful forever"],
+    ["💖 Love & Commitment", "Moments that deserve a timeless presentation"],
+    ["✨ Just a Demo",
+     "Elegant custom wedding cards available. DM to make it special."]
+  ],
+  festival: [
+    ["🪔 Warm Greetings", "Festivals bring hearts closer together"],
+    ["✨ Joy & Light", "Celebrate with beautifully designed wishes"],
+    ["✨ Just a Demo",
+     "Custom festival greeting cards available. DM to get yours."]
+  ]
+};
+
+function startDemo(t){
+  type = t;
+  step = 0;
+  document.getElementById("home").classList.add("hidden");
+  document.getElementById("demo").classList.remove("hidden");
+  loadPage();
+}
+
+function loadPage(){
+  document.getElementById("title").innerText = content[type][step][0];
+  document.getElementById("text").innerText = content[type][step][1];
+}
+
+function nextPage(){
+  step++;
+  if(step < 3){
+    loadPage();
+  } else {
+    document.getElementById("demo").innerHTML =
+      "<h2>💎 Demo Completed</h2><p>Thank you for watching this demo.<br>Visit our Instagram profile and DM to create your own custom digital card.</p>";
+  }
+}
+</script>
+
+</body>
+</html>
